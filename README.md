@@ -35,13 +35,13 @@ docker build -t grimkriegor/tes3mp-server:<TES3MP version> .
 #### Run the latest stable version
 
 ```
-docker run -it -v "./data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
+docker run -it -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
 ```
 
 #### Run a specific version
 
 ```
-docker run -it -v "./data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
+docker run -it -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
 ```
 
 ## Compose file
