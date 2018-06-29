@@ -17,6 +17,7 @@ docker pull grimkriegor/tes3mp-server
 
 ```bash
 git clone https://github.com/GrimKriegor/TES3MP-docker.git
+cd TES3MP-docker
 git checkout <TES3MP version> # optional
 docker build -t grimkriegor/tes3mp-server:<TES3MP version> .
 ```
