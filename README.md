@@ -9,16 +9,16 @@ https://hub.docker.com/r/grimkriegor/tes3mp-server/
 
 ### Pulling from Docker Hub
 
-Pull the latest stable version
+#### Pull the latest stable version
 
 ```
 docker pull grimkriegor/tes3mp-server
 ```
 
-Pull a specific version
+#### Pull a specific version
 
 ```
-docker pull grimkriegor/tes3mp-server:0.6.2
+docker pull grimkriegor/tes3mp-server:0.6.3
 ```
 
 ### Building
@@ -32,19 +32,50 @@ docker build -t grimkriegor/tes3mp-server:<TES3MP version> .
 
 ## Running in interactive mode
 
+#### Run the latest stable version
+
 ```
 docker run -it -v "./data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
 ```
 
-## Using with Docker Compose
+#### Run a specific version
+
+```
+docker run -it -v "./data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
+```
+
+## Compose file
+
+Alternatively you can use a compose file to deploy one or more servers as a stack.
+
+Create a file titled **docker-compose.yml** with the following contents:
 
 ```yml
 version: '3'
 services:
   server:
-    image: "grimkriegor/tes3mp-server"
+    image: "grimkriegor/tes3mp-server:0.6.3"
     volumes:
       - "./data:/server/data"
     ports:
       - "25565:25565/udp"
+# Optional extra servers:
+  server-legacy:
+    image: "grimkriegor/tes3mp-server:0.5.2"
+    volumes:
+      - "./data-legacy:/server/data"
+    ports:
+      - "25566:25565/udp"
+```
+
+### Deploy it locally
+
+```
+docker-compose up
+```
+
+### Deploy it on a swarm cluster
+
+```
+docker stack deploy -c docker-compose.yml tes3mp-server-stack
 ```
