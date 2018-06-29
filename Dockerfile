@@ -11,7 +11,12 @@ ENV PACKAGE "https://grimkriegor.zalkeen.net/public/tes3mp%2dserver%2dGNU%2bLinu
 ADD $PACKAGE /package.tar.gz
 RUN tar xvf /package.tar.gz --directory / && \
     rm /package.tar.gz && \
-    mv /TES3MP-server /server
+    mv /TES3MP-server /server && \
+    sed -i "s|home = .*|home = /server/data|g" /server/tes3mp-server-default.cfg && \
+    mkdir /server/data
+
+# Add bootstrap script
+ADD bootstrap.sh /bootstrap.sh
 
 # Expose server ports
 EXPOSE 25565/udp
@@ -23,4 +28,4 @@ VOLUME /server
 WORKDIR /server
 
 # Entrypoint
-ENTRYPOINT [ "/bin/bash", "tes3mp-server" ]
+ENTRYPOINT [ "/bin/bash", "/bootstrap.sh", "--",  "/bin/bash", "tes3mp-server" ]
