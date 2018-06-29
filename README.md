@@ -9,8 +9,16 @@ https://hub.docker.com/r/grimkriegor/tes3mp-server/
 
 ### Pulling from Docker Hub
 
+Pull the latest stable version
+
 ```
 docker pull grimkriegor/tes3mp-server
+```
+
+Pull a specific version
+
+```
+docker pull grimkriegor/tes3mp-server:0.6.2
 ```
 
 ### Building
