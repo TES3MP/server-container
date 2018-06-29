@@ -9,7 +9,8 @@ ENV PACKAGE "https://grimkriegor.zalkeen.net/public/tes3mp%2dserver%2dGNU%2bLinu
 
 # Download and extract
 ADD $PACKAGE /package.tar.gz
-RUN tar xvf package.tar.gz --directory / && \
+RUN tar xvf /package.tar.gz --directory / && \
+    rm /package.tar.gz && \
     mv /TES3MP-server /server
 
 # Expose server ports
