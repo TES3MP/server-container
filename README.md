@@ -30,18 +30,32 @@ git checkout <TES3MP version> # optional
 docker build -t grimkriegor/tes3mp-server:<TES3MP version> .
 ```
 
-## Running in interactive mode
+## Running
+
+There is no need to pull the image when running the container through one of the methods described below.
+
+Replace the path described at the `-v` (volume) argument to a directory on your machine you already have, or wish to have compatible server data and scripts. Keep the path that comes after the colon, as its the internal container path to where server data should be.
 
 #### Run the latest stable version
 
 ```
-docker run -it -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
+docker run -it --name TES3MP-server -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
 ```
 
 #### Run a specific version
 
 ```
-docker run -it -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
+docker run -it --name TES3MP-server -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
+```
+
+#### Run in the background
+
+Same as above, but removing the `-it` arguments.
+
+And to later attach the console:
+
+```
+docker attach TES3MP-server
 ```
 
 ## Compose file
