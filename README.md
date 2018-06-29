@@ -1,6 +1,26 @@
 # TES3MP-docker
 Docker image for the TES3MP server
 
+## Docker Hub
+
+https://hub.docker.com/r/grimkriegor/tes3mp-server/
+
+## Getting the image
+
+### Pulling from Docker Hub
+
+```
+docker pull grimkriegor/tes3mp-server
+```
+
+### Building
+
+```bash
+git clone https://github.com/GrimKriegor/TES3MP-docker.git
+git checkout <TES3MP version> # optional
+docker build -t grimkriegor/tes3mp-server:<TES3MP version> .
+```
+
 ## Running in interactive mode
 
 ```
