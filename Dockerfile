@@ -22,4 +22,4 @@ VOLUME /server
 WORKDIR /server
 
 # Entrypoint
-ENTRYPOINT [ "/bin/bash", "tes3mp-server.sh" ]
+ENTRYPOINT [ "/bin/bash", "tes3mp-server" ]
