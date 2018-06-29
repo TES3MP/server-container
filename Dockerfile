@@ -9,7 +9,9 @@ ENV PACKAGE "https://grimkriegor.zalkeen.net/public/tes3mp%2dserver%2dGNU%2bLinu
 
 # Download and extract
 ADD $PACKAGE /package.tar.gz
-RUN tar xvf package.tar.gz --directory /server
+RUN mkdir /server && \
+    tar xvf package.tar.gz --directory / && \
+    mv /TES3MP-server /server
 
 # Expose server ports
 EXPOSE 25565/udp
