@@ -39,13 +39,21 @@ Replace the path described at the `-v` (volume) argument to a directory on your 
 #### Run the latest stable version
 
 ```
-docker run -it --name TES3MP-server -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server
+docker run -it \
+--name TES3MP-server \
+-v "$HOME/TES3MP/data:/server/data" \
+-p "25565:25565/udp" \
+grimkriegor/tes3mp-server
 ```
 
 #### Run a specific version
 
 ```
-docker run -it --name TES3MP-server -v "$HOME/TES3MP/data:/server/data" -p "25565:25565/udp" grimkriegor/tes3mp-server:0.6.3
+docker run -it \
+--name TES3MP-server \
+-v "$HOME/TES3MP/data:/server/data" \
+-p "25565:25565/udp" \
+grimkriegor/tes3mp-server:0.6.3
 ```
 
 #### Run in the background
