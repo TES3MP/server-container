@@ -11,13 +11,13 @@ https://hub.docker.com/r/grimkriegor/tes3mp-server/
 
 #### Pull the latest stable version
 
-```
+```bash
 docker pull grimkriegor/tes3mp-server
 ```
 
 #### Pull a specific version
 
-```
+```bash
 docker pull grimkriegor/tes3mp-server:0.6.3
 ```
 
@@ -38,22 +38,22 @@ Replace the path described at the `-v` (volume) argument to a directory on your 
 
 #### Run the latest stable version
 
-```
+```bash
 docker run -it \
---name TES3MP-server \
--v "$HOME/TES3MP/data:/server/data" \
--p "25565:25565/udp" \
-grimkriegor/tes3mp-server
+    --name TES3MP-server \
+    -v "$HOME/TES3MP/data:/server/data" \
+    -p "25565:25565/udp" \
+    grimkriegor/tes3mp-server
 ```
 
 #### Run a specific version
 
-```
+```bash
 docker run -it \
---name TES3MP-server \
--v "$HOME/TES3MP/data:/server/data" \
--p "25565:25565/udp" \
-grimkriegor/tes3mp-server:0.6.3
+    --name TES3MP-server \
+    -v "$HOME/TES3MP/data:/server/data" \
+    -p "25565:25565/udp" \
+    grimkriegor/tes3mp-server:0.6.3
 ```
 
 #### Run in the background
@@ -62,7 +62,7 @@ Same as above, but removing the `-it` arguments.
 
 And to later attach the console:
 
-```
+```bash
 docker attach TES3MP-server
 ```
 
@@ -92,12 +92,12 @@ services:
 
 ### Deploy it locally
 
-```
+```bash
 docker-compose up
 ```
 
 ### Deploy it on a swarm cluster
 
-```
+```bash
 docker stack deploy -c docker-compose.yml tes3mp-server-stack
 ```
