@@ -5,24 +5,24 @@ ENV TES3MP_VERSION 0.6.2
 ARG BUILD_THREADS="4"
 
 RUN apk add --no-cache \
-        libgcc \
-        libstdc++ \
-        boost-system \
-        boost-filesystem \
-        make \
-        cmake \
-        build-base \
-        boost-dev \
-        openssl-dev \
-        ncurses \
-        bash \
-        git \
-        wget
+    libgcc \
+    libstdc++ \
+    boost-system \
+    boost-filesystem \
+    make \
+    cmake \
+    build-base \
+    boost-dev \
+    openssl-dev \
+    ncurses \
+    bash \
+    git \
+    wget
 
 RUN git clone -b "${TES3MP_VERSION}" --depth 1 https://github.com/TES3MP/openmw-tes3mp.git /tmp/TES3MP \
     && git clone -b "${TES3MP_VERSION}" --depth 1 https://github.com/TES3MP/CoreScripts.git /tmp/CoreScripts \
-    && git clone https://github.com/Koncord/CallFF.git --depth 1 /tmp/callff \
-    && git clone https://github.com/TES3MP/CrabNet.git --depth 1 /tmp/CrabNet \
+    && git clone --depth 1 https://github.com/Koncord/CallFF.git /tmp/callff \
+    && git clone --depth 1 https://github.com/TES3MP/CrabNet.git /tmp/CrabNet \
     && wget https://github.com/zdevito/terra/releases/download/release-2016-02-26/terra-Linux-x86_64-2fa8d0a.zip -O /tmp/terra.zip
 
 RUN cd /tmp/callff \
@@ -46,10 +46,11 @@ RUN cd /tmp/ \
 RUN cd /tmp/TES3MP \
     && mkdir build \
     && cd build \
-    && RAKNET_ROOT=/tmp/CrabNet/build cmake \
-        -DCMAKE_BUILD_TYPE=Release .. \
-        -DBUILD_OPENCS=OFF \
+    && RAKNET_ROOT=/tmp/CrabNet/build cmake .. \
+        -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_OPENMW_MP=ON \
+        -DBUILD_OPENMW=OFF \
+        -DBUILD_OPENCS=OFF \
         -DBUILD_BROWSER=OFF \
         -DBUILD_BSATOOL=OFF \
         -DBUILD_ESMTOOL=OFF \
