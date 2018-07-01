@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     boost-dev \
     openssl-dev \
     ncurses \
+    mesa-dev \
     bash \
     git \
     wget
@@ -38,6 +39,9 @@ RUN cd /tmp/CrabNet \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release ..\
     && cmake --build . --target RakNetLibStatic --config Release -- -j ${BUILD_THREADS}
+
+RUN cd /tmp/osg \
+    && cmake .
 
 RUN cd /tmp/ \
     && unzip -o terra.zip \
@@ -64,6 +68,7 @@ RUN cd /tmp/TES3MP \
         -DBUILD_WIZARD=OFF \
         -DCallFF_INCLUDES=/tmp/CallFF/include \
         -DCallFF_LIBRARY=/tmp/CallFF/build/src/libcallff.a \
+        -DOPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
         -DTerra_INCLUDES=/tmp/terra/include \
         -DTerra_LIBRARY_RELEASE=/tmp/terra/lib/libterra.a \
         -DRakNet_INCLUDES=/tmp/CrabNet/build/include \
