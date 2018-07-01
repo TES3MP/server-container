@@ -19,24 +19,25 @@ RUN apk add --no-cache \
     git \
     wget
 
-RUN git clone -b "${TES3MP_VERSION}" --depth 1 https://github.com/TES3MP/openmw-tes3mp.git /tmp/TES3MP \
-    && git clone -b "${TES3MP_VERSION}" --depth 1 https://github.com/TES3MP/CoreScripts.git /tmp/CoreScripts \
-    && git clone --depth 1 https://github.com/Koncord/CallFF.git /tmp/callff \
+RUN git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/openmw-tes3mp.git /tmp/TES3MP \
+    && git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/CoreScripts.git /tmp/CoreScripts \
+    && git clone --depth 1 https://github.com/Koncord/CallFF.git /tmp/CallFF \
     && git clone --depth 1 https://github.com/TES3MP/CrabNet.git /tmp/CrabNet \
+    && git clone --depth 1 https://github.com/OpenMW/osg.git /tmp/osg \
     && wget https://github.com/zdevito/terra/releases/download/release-2016-02-26/terra-Linux-x86_64-2fa8d0a.zip -O /tmp/terra.zip
 
-RUN cd /tmp/callff \
+RUN cd /tmp/CallFF \
     && mkdir build \
     && cd build \
     && cmake .. \
-    && make
+    && make -j ${BUILD_THREADS}
 
 RUN cd /tmp/CrabNet \
     && git reset --hard origin/master \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release ..\
-    && cmake --build . --target RakNetLibStatic --config Release
+    && cmake --build . --target RakNetLibStatic --config Release -- -j ${BUILD_THREADS}
 
 RUN cd /tmp/ \
     && unzip -o terra.zip \
@@ -46,7 +47,8 @@ RUN cd /tmp/ \
 RUN cd /tmp/TES3MP \
     && mkdir build \
     && cd build \
-    && RAKNET_ROOT=/tmp/CrabNet/build cmake .. \
+    && RAKNET_ROOT=/tmp/CrabNet/build OPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
+        cmake .. \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_OPENMW_MP=ON \
         -DBUILD_OPENMW=OFF \
@@ -60,14 +62,14 @@ RUN cd /tmp/TES3MP \
         -DBUILD_MYGUI_PLUGIN=OFF \
         -DBUILD_OPENMW=OFF \
         -DBUILD_WIZARD=OFF \
-        -DCallFF_INCLUDES=/tmp/callff/include \
-        -DCallFF_LIBRARY=/tmp/callff/build/src/libcallff.a \
+        -DCallFF_INCLUDES=/tmp/CallFF/include \
+        -DCallFF_LIBRARY=/tmp/CallFF/build/src/libcallff.a \
         -DTerra_INCLUDES=/tmp/terra/include \
         -DTerra_LIBRARY_RELEASE=/tmp/terra/lib/libterra.a \
         -DRakNet_INCLUDES=/tmp/CrabNet/build/include \
         -DRakNet_LIBRARY_RELEASE=/tmp/CrabNet/build/build/lib/libRakNetLibStatic.a \
         -DRakNet_LIBRARY_DEBUG=/tmp/CrabNet/build/build/lib/libRakNetLibStatic.a \
-    && make
+    && make -j ${BUILD_THREADS}
 
 RUN mv /tmp/TES3MP/build /server \
     && mv /tmp/CoreScripts /server/Corescripts \
