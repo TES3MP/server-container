@@ -79,6 +79,14 @@ FROM alpine:latest
 LABEL maintainer="Grim Kriegor <grimkriegor@krutt.org>"
 LABEL description="Docker image for the TES3MP server"
 
+RUN apk add --no-cache \
+        libgcc \
+        libstdc++ \
+        boost-system \
+        boost-filesystem \
+        luajit \
+        bash
+
 COPY --from=builder /server /
 ADD bootstrap.sh /bootstrap.sh
 
