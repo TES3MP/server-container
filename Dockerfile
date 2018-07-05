@@ -67,7 +67,7 @@ RUN cd /tmp/TES3MP \
     && make -j ${BUILD_THREADS}
 
 RUN mv /tmp/TES3MP/build /server \
-    && mv /tmp/CoreScripts /server/Corescripts \
+    && mv /tmp/CoreScripts /server/CoreScripts \
     && sed -i "s|home = .*|home = /server/data|g" /server/tes3mp-server-default.cfg \
     && mkdir /server/data
 
@@ -81,14 +81,15 @@ RUN apk add --no-cache \
         libstdc++ \
         boost-system \
         boost-filesystem \
+        boost-program_options \
         luajit \
         bash
 
-COPY --from=builder /server /
+COPY --from=builder /server /server
 ADD bootstrap.sh /bootstrap.sh
 
 EXPOSE 25565/udp
 VOLUME /server
 
 WORKDIR /server
-ENTRYPOINT [ "/bin/bash", "/bootstrap.sh", "--",  "/bin/bash", "tes3mp-server" ]
+ENTRYPOINT [ "/bin/bash", "/bootstrap.sh", "--", "./tes3mp-server" ]
