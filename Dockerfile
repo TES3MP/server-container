@@ -63,9 +63,6 @@ RUN cd /tmp/TES3MP \
         -DBUILD_WIZARD=OFF \
         -DCallFF_INCLUDES=/tmp/CallFF/include \
         -DCallFF_LIBRARY=/tmp/CallFF/build/src/libcallff.a \
-        -DRakNet_INCLUDES=/tmp/CrabNet/build/include \
-        -DRakNet_LIBRARY_RELEASE=/tmp/CrabNet/build/build/lib/libRakNetLibStatic.a \
-        -DRakNet_LIBRARY_DEBUG=/tmp/CrabNet/build/build/lib/libRakNetLibStatic.a \
         -DOPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
     && make -j ${BUILD_THREADS}
 
