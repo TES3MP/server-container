@@ -1,6 +1,6 @@
 FROM alpine:latest as builder
 
-ENV TES3MP_VERSION 0.6.3
+ENV TES3MP_VERSION 0.7.0
 
 ARG BUILD_THREADS="4"
 
