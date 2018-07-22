@@ -1,8 +1,8 @@
-# TES3MP/docker-server
+# TES3MP/server-docker
 
 Docker image for the TES3MP server
 
-[ARM version](https://github.com/TES3MP/docker-server-armhf)
+[ARM version](https://github.com/TES3MP/server-docker-armhf)
 
 ## Docker Hub
 
