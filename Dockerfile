@@ -69,6 +69,7 @@ RUN cd /tmp/TES3MP \
 RUN mv /tmp/TES3MP/build /server \
     && mv /tmp/CoreScripts /server/CoreScripts \
     && sed -i "s|home = .*|home = /server/data|g" /server/tes3mp-server-default.cfg \
+    && cp /tmp/TES3MP/tes3mp-credits.md /server/ \
     && mkdir /server/data
 
 FROM alpine:latest
