@@ -7,7 +7,7 @@ script:
   - >
     if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       echo "$DOCKERHUB_PASS" | docker login -u="$DOCKERHUB_USER" --password-stdin
-      TAG=$(grep "ENV TES3MP_VERSION" Dockerfile | awk 'NF>1{print $NF}')
+      TAG=$(grep "ENV TES3MP_VERSION .*" Dockerfile | awk 'NF>1{print $NF}')
       docker tag tes3mp/server tes3mp/server:$TAG
       docker push tes3mp/server:$TAG
       if [ "$TRAVIS_BRANCH" == "master" ]; then
