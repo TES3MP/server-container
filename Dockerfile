@@ -1,6 +1,7 @@
 FROM alpine:latest as builder
 
-ENV TES3MP_VERSION 0.7.0
+ENV TES3MP_VERSION "0.7.0"
+ENV TES3MP_VERSION_STRING "0.44.0\n292536439eeda58becdb7e441fe2e61ebb74529e"
 
 ARG BUILD_THREADS="4"
 
@@ -70,6 +71,7 @@ RUN cd /tmp/TES3MP \
 RUN mv /tmp/TES3MP/build /server \
     && mv /tmp/CoreScripts /server/CoreScripts \
     && sed -i "s|home = .*|home = /server/data|g" /server/tes3mp-server-default.cfg \
+    && echo -e ${TES3MP_VERSION_STRING} > /server/resources/version \
     && cp /tmp/TES3MP/tes3mp-credits.md /server/ \
     && mkdir /server/data
 
