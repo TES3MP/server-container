@@ -24,15 +24,8 @@ RUN apk add --no-cache \
 
 RUN git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/openmw-tes3mp.git /tmp/TES3MP \
     && git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/CoreScripts.git /tmp/CoreScripts \
-    && git clone --depth 1 https://github.com/Koncord/CallFF.git /tmp/CallFF \
     && git clone https://github.com/TES3MP/CrabNet.git /tmp/CrabNet \
     && git clone --depth 1 https://github.com/OpenMW/osg.git /tmp/osg
-
-RUN cd /tmp/CallFF \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make -j ${BUILD_THREADS}
 
 RUN cd /tmp/CrabNet \
     && git reset --hard origin/master \
@@ -63,8 +56,6 @@ RUN cd /tmp/TES3MP \
         -DBUILD_MYGUI_PLUGIN=OFF \
         -DBUILD_OPENMW=OFF \
         -DBUILD_WIZARD=OFF \
-        -DCallFF_INCLUDES=/tmp/CallFF/include \
-        -DCallFF_LIBRARY=/tmp/CallFF/build/src/libcallff.a \
         -DOPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
     && make -j ${BUILD_THREADS}
 
