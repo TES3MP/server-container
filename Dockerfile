@@ -85,6 +85,7 @@ ADD bootstrap.sh /bootstrap.sh
 
 EXPOSE 25565/udp
 VOLUME /server
+VOLUME /data
 
 WORKDIR /server
 ENTRYPOINT [ "/bin/bash", "/bootstrap.sh", "--", "./tes3mp-server" ]
