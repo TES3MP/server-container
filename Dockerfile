@@ -81,10 +81,10 @@ RUN apk add --no-cache \
         bash
 
 COPY --from=builder /server /server
-ADD bootstrap.sh /bootstrap.sh
+ADD entrypoint.sh /entrypoint.sh
 
 EXPOSE 25565/udp
 VOLUME /data
 
 WORKDIR /server
-ENTRYPOINT [ "/bin/bash", "/bootstrap.sh", "--", "./tes3mp-server" ]
+ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
