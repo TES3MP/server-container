@@ -8,6 +8,16 @@ Docker image for the TES3MP server
 
 https://hub.docker.com/r/tes3mp/server/
 
+## Configuration
+
+Values can be passed into the server configuration file via environment variables.
+
+On startup the container will look for any environment variables prefixed by `TES3MP_SERVER_` and attempt to update them on `tes3mp-server-default.cfg`.
+
+Environment variables should be represented as uppercase snake case.
+
+For example `TES3MP_SERVER_MAXIMUM_PLAYERS` correlates to `maximumPlayers` in the configuration file.
+
 ## Getting the image
 
 ### Pulling from Docker Hub
@@ -44,6 +54,7 @@ Replace the path described at the `-v` (volume) argument to a directory on your 
 ```bash
 docker run -it \
     --name TES3MP-server \
+    -e TES3MP_SERVER_HOSTNAME="Containerized TES3MP Server" \
     -v "$HOME/TES3MP/data:/server/data" \
     -p "25565:25565/udp" \
     tes3mp/server
@@ -54,6 +65,7 @@ docker run -it \
 ```bash
 docker run -it \
     --name TES3MP-server \
+    -e TES3MP_SERVER_HOSTNAME="Containerized TES3MP Server" \
     -v "$HOME/TES3MP/data:/server/data" \
     -p "25565:25565/udp" \
     tes3mp/server:0.6.3
@@ -80,6 +92,8 @@ version: '3'
 services:
   server:
     image: "tes3mp/server:0.6.3"
+    environment:
+      - TES3MP_SERVER_HOSTNAME="Containerized TES3MP Server"
     volumes:
       - "./data:/server/data"
     ports:
@@ -87,6 +101,8 @@ services:
 # Optional extra servers:
   server-legacy:
     image: "tes3mp/server:0.5.2"
+    environment:
+      - TES3MP_SERVER_HOSTNAME="Containerized TES3MP Server (Legacy)"
     volumes:
       - "./data-legacy:/server/data"
     ports:
