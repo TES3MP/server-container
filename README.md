@@ -1,10 +1,10 @@
-# TES3MP/server-docker
+# TES3MP/server-container
 
-Docker image for the TES3MP server.
+Container image for the TES3MP server.
 
 Available for `linux/amd64` and `linux/arm/v7`.
 
-## Docker Hub
+## Container registry
 
 https://hub.docker.com/r/tes3mp/server/
 
@@ -20,7 +20,7 @@ For example `TES3MP_SERVER_MAXIMUM_PLAYERS` correlates to `maximumPlayers` in th
 
 ## Getting the image
 
-### Pulling from Docker Hub
+### Pulling from registry
 
 #### Pull the latest stable version
 
@@ -37,8 +37,8 @@ docker pull tes3mp/server:0.6.3
 ### Building
 
 ```bash
-git clone https://github.com/GrimKriegor/TES3MP-docker.git
-cd TES3MP-docker
+git clone https://github.com/GrimKriegor/TES3MP-container.git
+cd TES3MP-container
 git checkout <TES3MP version> # optional
 docker build -t tes3mp/server:<TES3MP version> .
 ```

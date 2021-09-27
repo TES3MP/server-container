@@ -23,7 +23,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=tes3mp/server-staging
+          DOCKER_IMAGE=tes3mp/server
           VERSION=$(grep "ENV TES3MP_VERSION .*" Dockerfile | awk 'NF>1{print $NF}')
           TAGS="${DOCKER_IMAGE}:${VERSION}"
           if [[ $GITHUB_REF =~ master ]]; then
