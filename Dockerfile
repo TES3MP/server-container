@@ -30,7 +30,7 @@ RUN git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/openmw-
 
 RUN cd /tmp/CrabNet \
     && git reset --hard origin/master \
-    && git checkout 4eeeaad2f6c11aeb82070df35169694b4fb7b04b \
+    && git checkout 19e66190e83f53bcdcbcd6513238ed2e54878a21 \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release ..\
