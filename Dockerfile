@@ -55,6 +55,7 @@ RUN cd /tmp/TES3MP \
         -DBUILD_MYGUI_PLUGIN=OFF \
         -DBUILD_OPENMW=OFF \
         -DBUILD_WIZARD=OFF \
+        -DBUILD_NIFTEST=OFF \
         -DOPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
     && make -j ${BUILD_THREADS}
 
