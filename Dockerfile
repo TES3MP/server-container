@@ -31,9 +31,7 @@ RUN git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/TES3MP.
 RUN cd /tmp/CrabNet \
     && git reset --hard origin/master \
     && git checkout 19e66190e83f53bcdcbcd6513238ed2e54878a21 \
-    && mkdir build \
-    && cd build \
-    && cmake -DCMAKE_BUILD_TYPE=Release ..\
+    && cmake -DCMAKE_BUILD_TYPE=Release .\
     && cmake --build . --target RakNetLibStatic --config Release -- -j ${BUILD_THREADS}
 
 RUN cd /tmp/osg \
@@ -42,7 +40,7 @@ RUN cd /tmp/osg \
 RUN cd /tmp/TES3MP \
     && mkdir build \
     && cd build \
-    && RAKNET_ROOT=/tmp/CrabNet/build \
+    && RAKNET_ROOT=/tmp/CrabNet \
         cmake .. \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_OPENMW_MP=ON \
