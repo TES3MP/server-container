@@ -1,4 +1,4 @@
-FROM alpine:3.12 as builder
+FROM alpine:3.10 as builder
 
 ENV TES3MP_VERSION 0.8.0
 ENV TES3MP_VERSION_STRING 0.47.0\\n000e8724cacaf0176f6220de111ca45098807e78
@@ -68,7 +68,7 @@ RUN mv /tmp/TES3MP/build /server \
     && cp /tmp/TES3MP/tes3mp-credits.md /server/ \
     && mkdir /server/data
 
-FROM alpine:3.12
+FROM alpine:3.10
 
 LABEL maintainer="Grim Kriegor <grimkriegor@krutt.org>"
 LABEL description="Docker image for the TES3MP server"
