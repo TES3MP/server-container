@@ -19,6 +19,7 @@ RUN apk add --no-cache \
     openssl-dev \
     ncurses \
     mesa-dev \
+    sdl2-dev \
     bash \
     git \
     wget
