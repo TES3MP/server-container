@@ -58,6 +58,7 @@ RUN cd /tmp/TES3MP \
         -DBUILD_WIZARD=OFF \
         -DBUILD_NIFTEST=OFF \
         -DOPENSCENEGRAPH_INCLUDE_DIRS=/tmp/osg/include \
+        -DRakNet_LIBRARY_DEBUG="${RakNet_LIBRARY_RELEASE}" \
     && make -j ${BUILD_THREADS}
 
 RUN mv /tmp/TES3MP/build /server \
