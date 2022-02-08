@@ -9,8 +9,7 @@ name: 'Build and publish container images'
 on:
   push:
     branches:
-      - master
-      - v*
+      - tes3mp-*
 
 jobs:
   docker:
