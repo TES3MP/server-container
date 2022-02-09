@@ -1,28 +1,26 @@
-FROM alpine:3.10 as builder
+FROM debian:buster-slim as builder
 
 ENV TES3MP_VERSION 0.8.0
 ENV TES3MP_VERSION_STRING 0.47.0\\n000e8724cacaf0176f6220de111ca45098807e78
 
 ARG BUILD_THREADS="4"
 
-RUN apk add --no-cache \
-    libgcc \
-    libstdc++ \
-    boost-system \
-    boost-filesystem \
-    boost-dev \
-    luajit-dev \
-    lz4-dev \
-    make \
-    cmake \
-    build-base \
-    openssl-dev \
-    ncurses \
-    mesa-dev \
-    sdl2-dev \
-    bash \
-    git \
-    wget
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        libboost-system1.67-dev \
+        libboost-filesystem1.67-dev \
+        libboost-iostreams1.67-dev \
+        libboost-program-options1.67-dev \
+        libboost-dev \
+        libluajit-5.1-dev \
+        liblz4-dev \
+        libsdl2-dev \
+        make \
+        cmake \
+        bash \
+        git \
+        wget
 
 RUN git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/TES3MP.git /tmp/TES3MP \
     && git clone --depth 1 -b "${TES3MP_VERSION}" https://github.com/TES3MP/CoreScripts.git /tmp/CoreScripts \
