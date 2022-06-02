@@ -81,7 +81,9 @@ RUN apk add --no-cache \
         boost-filesystem \
         boost-program_options \
         luajit \
-        bash
+        bash \
+        py3-pip \
+    && pip3 install crudini
 
 COPY --from=builder /server /server
 ADD entrypoint.sh /entrypoint.sh

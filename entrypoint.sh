@@ -10,19 +10,20 @@ fi
 
 printenv | grep 'TES3MP_SERVER_' | while read -r envvar
 do
-  declare -a envvar_exploded=(`echo "$envvar" |sed 's/=/ /g'`)
-  variable="${envvar_exploded[0]}"
+  declare -a envvar_exploded=(`echo "$envvar" | sed 's/=/ /g'`)
+  config="${envvar_exploded[0]}"
   value="${envvar_exploded[@]:1}"
-  echo "Applying value of \"$variable\" to the configuration"
+  declare -a config_exploded=(`echo "$config" | sed 's/_/ /g'`)
+  section="${config_exploded[2]}"
+  section="$(echo $section | sed 's/[^ ]\+/\L\u&/g')"
+  variable="${config_exploded[@]:3}"
   variable=$(echo "$variable" \
-    | sed -e 's/TES3MP_SERVER_\(.*\)/\1/' \
     | tr '[:upper:]' '[:lower:]' \
-    | awk -F "_" \
-      '{printf "%s", $1; \
+    | awk -F " " '{printf "%s", $1; \
         for(i=2; i<=NF; i++) printf "%s", toupper(substr($i,1,1)) substr($i,2); print"";}')
-  sed -i \
-    "s/^\($variable =\).*$/\1 $value/" \
-    ./tes3mp-server-default.cfg
+  crudini --set ./tes3mp-server-default.cfg \
+    "${section}" "${variable}" "${value}"
+  echo "Applied config: [$section] $variable = $value"
 done
 
 ./tes3mp-server $@
